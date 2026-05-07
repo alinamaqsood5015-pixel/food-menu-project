@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Restaurant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <h1>🍕 Pizza King</h1>
+
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero">
+      <h2>Best Pizza In Town</h2>
+      <p>Fresh • Hot • Delicious</p>
+      <button onclick="showMessage()">Order Now</button>
+    </div>
+  </header>
+
+  <!-- MENU -->
+
+  <section class="menu" id="menu">
+
+    <h2>Our Pizza Menu</h2>
+
+    <div class="pizza-container">
+
+      <!-- Pizza 1 -->
+
+      <div class="pizza-card">
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500" alt="Pizza">
+
+        <h3>Cheese Pizza</h3>
+
+        <p class="price">$10</p>
+
+        <button onclick="orderPizza('Cheese Pizza')">
+          Order
+        </button>
+      </div>
+
+      <!-- Pizza 2 -->
+
+      <div class="pizza-card">
+        <img src="https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=500" alt="Pizza">
+
+        <h3>Pepperoni Pizza</h3>
+
+        <p class="price">$15</p>
+
+        <button onclick="orderPizza('Pepperoni Pizza')">
+          Order
+        </button>
+      </div>
+
+      <!-- Pizza 3 -->
+
+      <div class="pizza-card">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500" alt="Pizza">
+
+        <h3>Veggie Pizza</h3>
+
+        <p class="price">$12</p>
+
+        <button onclick="orderPizza('Veggie Pizza')">
+          Order
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="contact" id="contact">
+
+    <h2>Contact Us</h2>
+
+    <p>📞 +92 300 1234567</p>
+
+    <p>📧 pizza@gmail.com</p>
+
+  </section>
+
+  <footer>
+    <p>© 2026 Pizza King</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
