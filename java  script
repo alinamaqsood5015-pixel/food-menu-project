@@ -1,1 +1,114 @@
-const express = require("express");
+let expression = "";
+
+const expressionDisplay = document.getElementById("expression");
+const resultDisplay = document.getElementById("result");
+
+function addValue(value) {
+    expression += value;
+    expressionDisplay.innerText = expression;
+}
+
+function clearAll() {
+    expression = "";
+    expressionDisplay.innerText = "0";
+    resultDisplay.innerText = "0";
+}
+
+function deleteLast() {
+    expression = expression.slice(0, -1);
+
+    expressionDisplay.innerText = expression || "0";
+}
+
+function square() {
+    if (expression) {
+        expression = `(${expression})**2`;
+        expressionDisplay.innerText = expression;
+    }
+}
+
+function calculate() {
+
+    if (!expression) return;
+
+    try {
+
+        let exp = expression;
+
+        // Pi
+        exp = exp.replace(/π/g, "Math.PI");
+
+        // Square root
+        exp = exp.replace(/sqrt\(/g, "Math.sqrt(");
+
+        // Log
+        exp = exp.replace(/log\(/g, "Math.log10(");
+
+        // Natural log
+        exp = exp.replace(/ln\(/g, "Math.log(");
+
+        // Sin
+        exp = exp.replace(/sin\(/g, "Math.sin(toRadians(");
+
+        // Cos
+        exp = exp.replace(/cos\(/g, "Math.cos(toRadians(");
+
+        // Tan
+        exp = exp.replace(/tan\(/g, "Math.tan(toRadians(");
+
+        // Close brackets for trig functions
+        exp = exp.replace(
+            /Math\.(sin|cos|tan)\(toRadians\(([^()]*)\)/g,
+            "Math.$1(toRadians($2))"
+        );
+
+        let answer = Function(
+            `"use strict"; return (${exp})`
+        )();
+
+        if (!Number.isFinite(answer)) {
+            throw new Error();
+        }
+
+        answer = Number.isInteger(answer)
+            ? answer
+            : Number(answer.toFixed(10));
+
+        resultDisplay.innerText = answer;
+
+    } catch (error) {
+
+        resultDisplay.innerText = "Error";
+
+    }
+}
+
+function toRadians(degrees) {
+    return degrees * Math.PI / 180;
+}
+
+
+// Keyboard support
+document.addEventListener("keydown", function(event) {
+
+    const key = event.key;
+
+    if (
+        /[0-9+\-*/().%]/.test(key)
+    ) {
+        addValue(key);
+    }
+
+    if (key === "Enter") {
+        calculate();
+    }
+
+    if (key === "Backspace") {
+        deleteLast();
+    }
+
+    if (key === "Escape") {
+        clearAll();
+    }
+
+});
